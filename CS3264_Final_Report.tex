@@ -1,0 +1,74 @@
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2026}  % DO NOT CHANGE THIS
+\usepackage{times}  % DO NOT CHANGE THIS
+\usepackage{helvet}  % DO NOT CHANGE THIS
+\usepackage{courier}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
+%
+% These are recommended to typeset algorithms but not required. See the subsubsection on algorithms. Remove them if you don't have algorithms in your paper.
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%
+% These are are recommended to typeset listings but not required. See the subsubsection on listing. Remove this block if you don't have listings in your paper.
+\usepackage{newfloat}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off} % DO NOT CHANGE THIS
+\lstset{%
+	basicstyle={\footnotesize\ttfamily},% footnotesize acceptable for monospace
+	numbers=left,numberstyle=\footnotesize,xleftmargin=2em,% show line numbers, remove this entire line if you don't want the numbers.
+	aboveskip=0pt,belowskip=0pt,%
+	showstringspaces=false,tabsize=2,breaklines=true}
+\floatstyle{ruled}
+\newfloat{listing}{tb}{lst}{}
+\floatname{listing}{Listing}
+%
+% Keep the \pdfinfo as shown here. There's no need
+% for you to add the /Title and /Author tags.
+\pdfinfo{
+/TemplateVersion (2026.1)
+}
+
+\setcounter{secnumdepth}{0} %May be changed to 1 or 2 if section numbers are desired.
+
+% Title
+\title{Interpretable Machine Learning for Predicting Adverse Drug Interactions in Singapore}
+\author{
+    % Authors - Replace with actual names
+    An Xiao\textsuperscript{\rm 1},
+    Liu Lexi Name 2\textsuperscript{\rm 1},
+    Zhou Zirun Name 3\textsuperscript{\rm 1}
+}
+\affiliations{
+    % Affiliations
+    \textsuperscript{\rm 1}School of Computing, National University of Singapore\\
+    student1@nus.edu.sg, student2@nus.edu.sg, student3@nus.edu.sg
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The rapid advancement of healthcare systems and increased life expectancy have led to a growing prevalence of polypharmacy, particularly among elderly patients in Singapore. This paper proposes an interpretable machine learning application to predict the risk of adverse drug interactions, providing transparent explanations to support clinical decision-making tailored to the Singapore context.
+\end{abstract}
+
+\section{Introduction}
+
+The rapid advancement of healthcare systems and increased life expectancy have led to a growing prevalence of polypharmacy, where patients—particularly elderly individuals—are prescribed multiple medications simultaneously. While such multi-drug therapies are often necessary for managing chronic conditions, they significantly increase the risk of drug-drug interactions (DDIs), which may cause adverse side effects. This issue is especially critical in Singapore, where the ageing population is expanding rapidly, and chronic diseases such as diabetes are highly prevalent. As a result, patients are more likely to be prescribed complex combinations of medications, increasing the likelihood of harmful interactions.
+
+Singapore presents a particularly important context for addressing this problem. First, the country's demographic structure is shifting toward an ageing society, with a high proportion of elderly individuals requiring long-term medication. Second, Singapore exhibits a unique disease profile, with high rates of metabolic and cardiovascular conditions, which often necessitate multi-drug treatment plans. Third, the healthcare system in Singapore emphasises precision medicine and efficient clinical decision-making, creating a strong demand for tools that can assist healthcare professionals in evaluating complex prescription combinations. However, the database and applications that help medical staff assess drug interactions are only available overseas, which means their algorithm not best suited to the Singapore context. Existing approaches to managing drug interactions in Singapore rely heavily on static rule-based systems or reference databases, which may not adequately account for patient-specific factors or complex higher-order interactions among multiple drugs. To address these limitations, we propose an interpretable machine learning (ML) application that predicts the risk of adverse drug interactions and provides transparent explanations to support clinical decision-making that is more relevant under the Singapore context.\cite{c:21}
+
+The proposed system leverages the strengths of interpretable ML models—such as their ability to provide human-understandable decision rules and feature contributions—to ensure that medical professionals can trust and effectively utilise the model's predictions. By integrating patient-specific information and drug interaction data, the system enables clinicians to not only assess the risk of a given prescription but also understand the underlying factors contributing to that risk. We also plan to utilise active learning strategies to focus our training on more popular prescriptions in Singapore.
+
+\bibliography{CS3264_Final_Report}
+
+\end{document}
