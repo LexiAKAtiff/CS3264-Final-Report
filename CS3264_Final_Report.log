@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.18)  25 MAR 2026 22:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.18)  25 MAR 2026 22:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -226,12 +226,27 @@ Underfull \hbox (badness 2042) in paragraph at lines 94--95
  []
 
 (./CS3264_Final_Report.bbl
-Underfull \hbox (badness 2726) in paragraph at lines 36--40
+Underfull \hbox (badness 6461) in paragraph at lines 20--24
+\OT1/ptm/m/n/10 Con-cerns in Sin-ga-pore 2025.  $https : / / hop . sg / top -[] 3 -[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--24
+\OT1/ptm/m/n/10 health -[] concerns -[] singapore -[] 2025 / # : [] : text = Based % 20on %
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--24
+\OT1/ptm/m/n/10 20o^^Ncial % 20Ministry % 20of ,[] making % 20it % 20another %
+ []
+
+
+Underfull \hbox (badness 2726) in paragraph at lines 42--46
 []\OT1/ptm/m/n/10 Singapore De-part-ment of Statis-tics. 2025b.  Pop-u-la-
  []
 
 
-Underfull \hbox (badness 3449) in paragraph at lines 36--40
+Underfull \hbox (badness 3449) in paragraph at lines 42--46
 \OT1/ptm/m/n/10 tion.  $https : / / www . singstat . gov . sg / publication -[] resources /
  []
 
@@ -242,18 +257,18 @@ L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5574 strings out of 467525
- 90252 string characters out of 5423209
- 514893 words of memory out of 5000000
- 34450 multiletter control sequences out of 15000+600000
+ 5577 strings out of 467525
+ 90348 string characters out of 5423209
+ 516943 words of memory out of 5000000
+ 34453 multiletter control sequences out of 15000+600000
  640600 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,6n,76p,913b,314s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on CS3264_Final_Report.pdf (2 pages, 184009 bytes).
+ 57i,6n,76p,913b,322s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on CS3264_Final_Report.pdf (2 pages, 193616 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+ 58 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
