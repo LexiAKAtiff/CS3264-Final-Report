@@ -44,8 +44,8 @@
 \author{
     % Authors - Replace with actual names
     An Xiao\textsuperscript{\rm 1},
-    Liu Lexi Name 2\textsuperscript{\rm 1},
-    Zhou Zirun Name 3\textsuperscript{\rm 1}
+    Liu Lexi Name 2\textsuperscript{\rm 2},
+    Zhou Zirun Name 3\textsuperscript{\rm 3}
 }
 \affiliations{
     % Affiliations
@@ -63,12 +63,47 @@ The rapid advancement of healthcare systems and increased life expectancy have l
 
 \section{Introduction}
 
-The rapid advancement of healthcare systems and increased life expectancy have led to a growing prevalence of polypharmacy, where patients—particularly elderly individuals—are prescribed multiple medications simultaneously. While such multi-drug therapies are often necessary for managing chronic conditions, they significantly increase the risk of drug-drug interactions (DDIs), which may cause adverse side effects. This issue is especially critical in Singapore, where the ageing population is expanding rapidly, and chronic diseases such as diabetes are highly prevalent. As a result, patients are more likely to be prescribed complex combinations of medications, increasing the likelihood of harmful interactions.
+The rapid advancement of healthcare systems and increased life expectancy have led to a growing prevalence of polypharmacy, where patients—particularly elderly individuals—are prescribed multiple medications simultaneously. While such multi-drug therapies are often necessary for managing chronic conditions, they significantly increase the risk of drug-drug interactions (DDIs). Statistics show that DDIs may greatly contribute to a worsening patient condition through adverse side effects.\cite{Chan2016:chan}, and the risk of DDIs is underperceived by the medical indsutry.\cite{polypharmacy}
 
-Singapore presents a particularly important context for addressing this problem. First, the country's demographic structure is shifting toward an ageing society, with a high proportion of elderly individuals requiring long-term medication. Second, Singapore exhibits a unique disease profile, with high rates of metabolic and cardiovascular conditions, which often necessitate multi-drug treatment plans. Third, the healthcare system in Singapore emphasises precision medicine and efficient clinical decision-making, creating a strong demand for tools that can assist healthcare professionals in evaluating complex prescription combinations. However, the database and applications that help medical staff assess drug interactions are only available overseas, which means their algorithm not best suited to the Singapore context. Existing approaches to managing drug interactions in Singapore rely heavily on static rule-based systems or reference databases, which may not adequately account for patient-specific factors or complex higher-order interactions among multiple drugs. To address these limitations, we propose an interpretable machine learning (ML) application that predicts the risk of adverse drug interactions and provides transparent explanations to support clinical decision-making that is more relevant under the Singapore context.\cite{c:21}
+DDI is especially critical in Singapore.\cite{Ho2023} Given that there is a vaccum in reliable formal methods among Singaporean doctors to avoid drug interactions, we propose to leverage machine learning algorithms to provide explanable advices Singaporean doctors on possible drug interactions for every prescription. We first shows that drug interaction is an important issue that can be properly addressed through machine learning algorithm under Singaporean context. We will then expound on the further details in our choice of the machine learning algorithm and its training process. Last but not the least, we will demonstrate the result of our prototypical machine learning application and how it benefits Singapore's medical industry through providing explanable advice to potential drug interactions in prescriptions.
 
-The proposed system leverages the strengths of interpretable ML models—such as their ability to provide human-understandable decision rules and feature contributions—to ensure that medical professionals can trust and effectively utilise the model's predictions. By integrating patient-specific information and drug interaction data, the system enables clinicians to not only assess the risk of a given prescription but also understand the underlying factors contributing to that risk. We also plan to utilise active learning strategies to focus our training on more popular prescriptions in Singapore.
 
+\section{Motivation}
+
+\subsection{Drug interactions as a severe issue in Singapore}
+
+DDI has been recognised as a significant contributor to the degeneration of patient health \cite{polypharmacy,Chan2016:chan}. The complexity of managing multiple medications increases the likelihood of unintended interactions, making it crucial for healthcare providers to have effective tools for predicting and preventing DDIs.
+
+Singapore presents a particularly important context for addressing this problem. First, the country's demographic structure is shifting toward an ageing society, with a high proportion of elderly individuals requiring long-term medication.\cite{singstat_population_2025} Figure 1 shows our rough estimate of the elderly population in Singapore in 2025 based on the age distribution of the population and the stratified death rate of different age groups\cite{singstat_death_rate_2025} in Singapore in 2025. With aging population, the number of senior citizen is expected to proliferate in the upcoming decades, which indicates a sharp increase in the demand of polypharmacy due to the positive association between seniority of an individual to more complex medication needs.\cite{Ho2023,Wong2019} 
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.95\columnwidth]{./population.png}
+    \caption{Predicted elderly Population(above 60) of Singapore in 2025.}
+    \label{fig:population_pyramid}
+\end{figure}
+
+Second, Singapore exhibits a unique disease profile, with high rates of metabolic and cardiovascular conditions, which often necessitate multi-drug treatment plans. 
+
+Third, the healthcare system in Singapore emphasises precision medicine and efficient clinical decision-making, creating a strong demand for tools that can assist healthcare professionals in evaluating complex prescription combinations.Even though there are drug interaction database and alogrithms available, the data are mostly collected from a more Western profile. The bias in the data collected may lead to potential underrepresentation of certain diseases that are more common among Singaporeans. The underrepresentation indicates that the current algorithms may not be the most appropriate under Singaporean context and there is a significant space for improvement for us.  
+
+\subsection{Why machine learning algorithms}
+
+Machine learning has been effective in detecting patterns of drug interactions as it can be categorised as a classificastion task.\cite{Gheorghita2025} When the number of drugs involved in a single prescription increase, we expect the number of possible pair of drugs that may produce interaction to increase exponentially($N =$ $n\choose2$, n is the number of drugs and N is the number of possible pairs), which eventually leads to human oversight. 
+
+We can further leverage the strengths of interpretable ML models—such as their ability to provide human-understandable decision rules and feature contributions—to ensure that medical professionals can trust and effectively utilise the model's predictions. More details will be explored in the solution section.
+
+\subsection{ethical considerations}
+
+While the previous sections mentions about the advatages of using machine learning algorithms to detect drug interactions, we also acknowledge the important ethical considerations as the healthcare industry typically involves high-stake responsibilities where many believe that human decisions must be involved. Drug prescription is no exception. 
+
+First, any misjudgement by the algorithm must be held accountable. The machine learning algorithm can never make any independent judgement on its own without human oversight. The patient, who are unable to judge the accuracy of the predicted drug interaction result, should also not be exposed to the decision making process. Therefore, we envision the algorithm to be most ethically positioned as advisory to the doctors, with which the doctor gives the final decision on whether the drug interaction may actually happen and be held accountable for his own judgement as a medical professional.
+
+\section{Method}
+\subsection{Data collection}
+\subsection{Algorithm}
+\subsection{Training process}
+\section{Results}
 \bibliography{CS3264_Final_Report}
 
 \end{document}

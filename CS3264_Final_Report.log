@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.18)  23 MAR 2026 15:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.18)  25 MAR 2026 22:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -206,34 +206,54 @@ Underfull \hbox (badness 1629) in paragraph at lines 66--67
 \OT1/ptm/m/n/10 The rapid ad-vance-ment of health-care sys-tems and in-
  []
 
+<./population.png, id=1, 739.76375pt x 485.815pt>
+File: ./population.png Graphic file (type png)
+<use ./population.png>
+Package pdftex.def Info: ./population.png  used on input line 81.
+(pdftex.def)             Requested size: 227.42392pt x 149.3483pt.
+[1{e:/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{e:/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
-Underfull \hbox (badness 1655) in paragraph at lines 70--71
-[]\OT1/ptm/m/n/10 The pro-posed sys-tem lever-ages the strengths of in-
+
+
+ <./population.png (PNG copy)>]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 92.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 92.
+
+Underfull \hbox (badness 2042) in paragraph at lines 94--95
+\OT1/ptm/m/n/10 ML mod-els|such as their abil-ity to pro-vide human-
  []
 
-(./CS3264_Final_Report.bbl) [1{e:/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{e:/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc}
+(./CS3264_Final_Report.bbl
+Underfull \hbox (badness 2726) in paragraph at lines 36--40
+[]\OT1/ptm/m/n/10 Singapore De-part-ment of Statis-tics. 2025b.  Pop-u-la-
+ []
 
 
+Underfull \hbox (badness 3449) in paragraph at lines 36--40
+\OT1/ptm/m/n/10 tion.  $https : / / www . singstat . gov . sg / publication -[] resources /
+ []
 
-] (./CS3264_Final_Report.aux)
+) [2] (./CS3264_Final_Report.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5528 strings out of 467525
- 89331 string characters out of 5423209
- 510475 words of memory out of 5000000
- 34407 multiletter control sequences out of 15000+600000
- 636783 words of font info for 52 fonts, out of 8000000 for 9000
+ 5574 strings out of 467525
+ 90252 string characters out of 5423209
+ 514893 words of memory out of 5000000
+ 34450 multiletter control sequences out of 15000+600000
+ 640600 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,5n,76p,1445b,266s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on CS3264_Final_Report.pdf (1 page, 31031 bytes).
+ 57i,6n,76p,913b,314s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><e:/texlive/2026/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on CS3264_Final_Report.pdf (2 pages, 184009 bytes).
 PDF statistics:
- 19 PDF objects out of 1000 (max. 8388607)
- 11 compressed objects within 1 object stream
+ 53 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
