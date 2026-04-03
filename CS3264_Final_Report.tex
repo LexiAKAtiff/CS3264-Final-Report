@@ -119,6 +119,8 @@ Additionally, with the predicted interaction, we can further predict the severit
 \subsection{Input construction}
 
 \subsubsection{Drug Interaction Pairs}
+\
+\newline
 For the input, we represent each drug using its molecular fingerprint represented by MACCS keys. MACCS keys converts chemical structures into a binary vector of 166 dimensions based on the presence or absence of specific chemical substructures.\cite{rdkit} It is also widely adpoted in pharmaceutical research as a form of data representation of drugs\cite{xie2020improvement,durant2002reoptimization} The model learns to predict the interaction label based on the combined features of the two drugs.
 For instance, the 120 th dimension of the input vector indicates the presence of a benzene ring.\cite{rdkit}
 
@@ -137,7 +139,8 @@ where $x_i$ is the $i$-th dimension of the input vector, corresponding to the $i
 This new representation resolves two major challenges. First, most machine learning algorithms only took one single vector as input, and the addition operation allows us to combine the two drug fingerprints into a single vector without losing any information. Second, the addition operation is commutative, which means that the order of the drugs does not affect the input representation. This is important because drug interactions are symmetric; if Drug A interacts with Drug B, then Drug B interacts with Drug A.
 
 \subsubsection{Patient Condition}
-
+\
+\newline
 A simple binary vector will be used to represent the presence or absence of certain conditions that are relevant to drug interactions. This allows the model to consider how patient-specific factors may influence the likelihood and severity of drug interactions.
 
 
