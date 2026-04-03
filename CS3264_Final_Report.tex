@@ -9,6 +9,8 @@
 \def\UrlFont{\rm}  % DO NOT CHANGE THIS
 \usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
 \usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{amsmath}
+\usepackage{amssymb}
 \frenchspacing  % DO NOT CHANGE THIS
 \setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
 \setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
@@ -44,8 +46,8 @@
 \author{
     % Authors - Replace with actual names
     An Xiao\textsuperscript{\rm 1},
-    Liu Lexi Name 2\textsuperscript{\rm 2},
-    Zhou Zirun Name 3\textsuperscript{\rm 3}
+    Liu Lexi\textsuperscript{\rm 2},
+    Zhou Zirun\textsuperscript{\rm 3}
 }
 \affiliations{
     % Affiliations
@@ -63,9 +65,9 @@ The rapid advancement of healthcare systems and increased life expectancy have l
 
 \section{Introduction}
 
-The rapid advancement of healthcare systems and increased life expectancy have led to a growing prevalence of polypharmacy, where patients—particularly elderly individuals—are prescribed multiple medications simultaneously. While such multi-drug therapies are often necessary for managing chronic conditions, they significantly increase the risk of drug-drug interactions (DDIs). Statistics show that DDIs may greatly contribute to a worsening patient condition through adverse side effects.\cite{Chan2016:chan}, and the risk of DDIs is underperceived by the medical indsutry.\cite{polypharmacy}
+The rapid advancement of healthcare systems and increased life expectancy have led to a growing prevalence of polypharmacy, where patients—particularly elderly individuals—are prescribed multiple medications simultaneously. While such multi-drug therapies are often necessary for managing chronic conditions, they significantly increase the risk of drug-drug interactions (DDIs). Statistics show that DDIs may greatly contribute to a worsening patient condition through adverse side effects.\cite{Chan2016:chan}, and the risk of DDIs is underperceived by the medical industry.\cite{polypharmacy}
 
-DDI is especially critical in Singapore.\cite{Ho2023} Given that there is a vaccum in reliable formal methods among Singaporean doctors to avoid drug interactions, we propose to leverage machine learning algorithms to provide explanable advices Singaporean doctors on possible drug interactions for every prescription. We first shows that drug interaction is an important issue that can be properly addressed through machine learning algorithm under Singaporean context. We will then expound on the further details in our choice of the machine learning algorithm and its training process. Last but not the least, we will demonstrate the result of our prototypical machine learning application and how it benefits Singapore's medical industry through providing explanable advice to potential drug interactions in prescriptions.
+DDI is especially critical in Singapore.\cite{Ho2023} Given that there is a vacuum in reliable formal methods among Singaporean doctors to avoid drug interactions, we propose to leverage machine learning algorithms to provide explainable advice to Singaporean doctors on possible drug interactions for every prescription. We first show that drug interaction is an important issue that can be properly addressed through machine learning algorithm under Singaporean context. We will then expound on the further details in our choice of the machine learning algorithm and its training process. Last but not the least, we will demonstrate the result of our prototypical machine learning application and how it benefits Singapore's medical industry through providing explainable advice on potential drug interactions in prescriptions.
 
 
 \section{Motivation}
@@ -89,18 +91,56 @@ Third, the healthcare system in Singapore emphasises precision medicine and effi
 
 \subsection{Why machine learning algorithms}
 
-Machine learning has been effective in detecting patterns of drug interactions as it can be categorised as a classificastion task.\cite{Gheorghita2025} When the number of drugs involved in a single prescription increase, we expect the number of possible pair of drugs that may produce interaction to increase exponentially($N =$ $n\choose2$, n is the number of drugs and N is the number of possible pairs), which eventually leads to human oversight. 
+Machine learning has been effective in detecting patterns of drug interactions as it can be categorised as a classification task.\cite{Gheorghita2025} When the number of drugs involved in a single prescription increase, we expect the number of possible pair of drugs that may produce interaction to increase exponentially($N =$ $n\choose2$, n is the number of drugs and N is the number of possible pairs), which eventually leads to human oversight. 
 
 We can further leverage the strengths of interpretable ML models—such as their ability to provide human-understandable decision rules and feature contributions—to ensure that medical professionals can trust and effectively utilise the model's predictions. More details will be explored in the solution section.
 
 \subsection{Ethical considerations}
 
-While the previous sections mentions about the advatages of using machine learning algorithms to detect drug interactions, we also acknowledge the important ethical considerations as the healthcare industry typically involves high-stake responsibilities where many believe that human decisions must be involved. Drug prescription is no exception. 
+While the previous sections mention the advantages of using machine learning algorithms to detect drug interactions, we also acknowledge the important ethical considerations as the healthcare industry typically involves high-stake responsibilities where many believe that human decisions must be involved. Drug prescription is no exception. 
 
 First, any misjudgement by the algorithm must be held accountable. The machine learning algorithm can never make any independent judgement on its own without human oversight. The patient, who are unable to judge the accuracy of the predicted drug interaction result, should also not be exposed to the decision making process. Therefore, we envision the algorithm to be most ethically positioned as advisory to the doctors, with which the doctor gives the final decision on whether the drug interaction may actually happen and be held accountable for his own judgement as a medical professional.
 
 \section{Method}
-\subsection{Data construction}
+
+We first define the input and the output of our machine learning model. The input is a pair of drugs and the patient's condition, and the output contains the possibility predicted about whether the two drugs interact with each other.
+We mathematically express our model as follows:
+
+\begin{equation}
+    \hat{y} = F(D_A, D_B)
+\end{equation}
+
+where $D_A, D_B \in \mathbb{R}^{d}$ are the molecular fingerprints of Drug A and Drug B with dimension $d$, respectively, and $c$ is the patient's condition vector. The function $F$ represents the machine learning model that takes these inputs and produces a prediction $\hat{y}$ indicating the probability of an interaction. In our experiment, we use random forest  as our machine learning models, which will be further explained in the next section.
+
+Then with the output possibility $\hat{y}$, we can further apply a threshold to determine whether the drug pair is predicted to interact or not. For example, if $\hat{y} > 0.3$, we can classify the drug pair as interacting; otherwise, we classify it as non-interacting. After interacting pairs are identified, we can further provide an explanation of the interaction through the interpretable machine learning model, which will be discussed in the next section.
+
+Additionally, with the predicted interaction, we can further predict the severity of the interaction of the drug pair. For example, we can classify the severity into three levels: mild, moderate, and severe based on the patient's condition and the predicted interaction. This can be achieved by training a separate model that takes the predicted interaction and patient's condition as input and outputs the severity level.
+
+\subsection{Input construction}
+
+\subsubsection{Drug Interaction Pairs}
+For the input, we represent each drug using its molecular fingerprint represented by MACCS keys. MACCS keys converts chemical structures into a binary vector of 166 dimensions based on the presence or absence of specific chemical substructures.\cite{rdkit} It is also widely adpoted in pharmaceutical research as a form of data representation of drugs\cite{xie2020improvement,durant2002reoptimization} The model learns to predict the interaction label based on the combined features of the two drugs.
+For instance, the 120 th dimension of the input vector indicates the presence of a benzene ring.\cite{rdkit}
+
+To combine the two drug fingerprints into a single input vector, we perform addition of the two 166-dimensional vectors, resulting in a trinary 166-dimensional vector that captures the combined chemical features of both drugs. In other words, the input vector for a drug pair is represented as:
+
+\begin{equation}
+    x_i = \begin{cases}
+        0 & \text{if neither drug has the substructure} \\
+        1 & \text{if exactly one drug has the substructure} \\
+        2 & \text{if both drugs have the substructure} 
+        \end{cases}
+\end{equation}
+
+where $x_i$ is the $i$-th dimension of the input vector, corresponding to the $i$-th MACCS key. 
+
+This new representation resolves two major challenges. First, most machine learning algorithms only took one single vector as input, and the addition operation allows us to combine the two drug fingerprints into a single vector without losing any information. Second, the addition operation is commutative, which means that the order of the drugs does not affect the input representation. This is important because drug interactions are symmetric; if Drug A interacts with Drug B, then Drug B interacts with Drug A.
+
+\subsubsection{Patient Condition}
+
+A simple binary vector will be used to represent the presence or absence of certain conditions that are relevant to drug interactions. This allows the model to consider how patient-specific factors may influence the likelihood and severity of drug interactions.
+
+
 \subsubsection{Data source}
 \ 
 \newline
@@ -111,14 +151,14 @@ We use the BIOSNAP ChChMiner dataset, which is derived from DrugBank and contain
 \newline
 The BIOSNAP dataset only contains known positive interactions. Since no ground-truth negative pairs are provided, we construct negative examples by randomly sampling drug pairs that do not appear in the positive set. We follow the standard 1:1 positive-to-negative ratio.
 
-We acknowledge that this procedure relies on the closed world assumption that pairs absent from DrugBank are treated as non-interacting, though some may represent undiscovered interactions. This is a well-recognised limitation of DDI benchmarks and is consistent with prior work in this area.
+We acknowledge that this procedure relies on the assumption that pairs absent from DrugBank are treated as non-interacting, though some may represent undiscovered interactions. This is a well-recognised limitation of DDI benchmarks and is consistent with prior work in this area.
 
 \subsubsection{Molecular feature representation}
 \ 
 \newline
 Each drug is represented as a 166-dimensional binary fingerprint generated using the MACCS Keys (Molecular ACCess System) scheme via RDKit. MACCS Keys encode the presence or absence of 166 predefined chemical substructures, such as the presence of a benzene ring (Key 120), a carboxyl group (Key 148), or a nitrogen-containing heterocycle (Key 80). Each bit is either 1 (substructure present) or 0 (absent).
 
-During data preprocessing, we removed MACCS bits with zero variance across all drugs in the dataset, which also means the bits that are either universally present of universally absent. These features carry no discriminative information and their removal reduces noise in the input representation. After this filtering step, the effective fingerprint dimensionality is reduced from 166 to 162 bits per drug, resulting in a final feature vector of 324 dimensions per drug pair.
+During data preprocessing, we removed MACCS bits with zero variance across all drugs in the dataset, which also means the bits that are either universally present or universally absent. These features carry no discriminative information and their removal reduces noise in the input representation. After this filtering step, the effective fingerprint dimensionality is reduced from 166 to 162 bits per drug, resulting in a final feature vector of 324 dimensions per drug pair.
 
 We chose MACCS Keys over the more commonly used Morgan fingerprints mainly because each MACCS bit corresponds to a named, chemically interpretable substructure, which directly supports our interpretability analysis using SHAP. 
 
@@ -143,7 +183,7 @@ We train four models of increasing complexity on the same dataset and splits, so
 \subsubsection{Logistic Regression}
 \ 
 \newline
-Logistic Regression serves as our linear baseline. It computes a weighted sum of all 332 input features and passes the result through a sigmoid function to produce an interaction probability:
+Logistic Regression serves as our linear baseline. It computes a weighted sum of all 324 input features and passes the result through a sigmoid function to produce an interaction probability:
 
 \begin{equation}
     \hat{y} = \sigma(\mathbf{w}^T \mathbf{x} + b)
