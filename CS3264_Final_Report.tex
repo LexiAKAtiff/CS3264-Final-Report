@@ -76,9 +76,9 @@ DDI is especially critical in Singapore.\cite{Ho2023} Given that there is a vacu
 
 \subsection{Drug interactions as a severe issue in Singapore}
 
-DDI has been recognised as a significant contributor to the degeneration of patient health \cite{polypharmacy,Chan2016:chan}. The complexity of managing multiple medications increases the likelihood of unintended interactions, making it crucial for healthcare providers to have effective tools for predicting and preventing DDIs.
+DDI has been recognised as a significant contributor to the degeneration of patient health.\cite{polypharmacy,Chan2016:chan}. The complexity of managing multiple medications increases the likelihood of unintended interactions, making it crucial for healthcare providers to have effective tools for predicting and preventing DDIs.
 
-Singapore presents a particularly important context for addressing this problem. First, the country's demographic structure is shifting toward an ageing society, with a high proportion of elderly individuals requiring long-term medication.\cite{singstat_population_2025} Figure 1 shows our rough estimate of the elderly population in Singapore in 2025 based on the age distribution of the population and the stratified death rate of different age groups\cite{singstat_death_rate_2025} in Singapore in 2025. With aging population, the number of senior citizen is expected to proliferate in the upcoming decades, which indicates a sharp increase in the demand of polypharmacy due to the positive association between seniority of an individual to more complex medication needs.\cite{Ho2023,Wong2019} 
+Singapore presents a particularly important context for addressing this problem. First, the country's demographic structure is shifting toward an ageing society, with a high proportion of elderly individuals requiring long-term medication.\cite{singstat_population_2025} Figure 1 shows our rough estimate of the elderly population in Singapore based on the age distribution of the population and the stratified death rate of different age groups\cite{singstat_death_rate_2025} in Singapore in 2025. A sharp increase in the demand of polypharmacy is therefore expected.\cite{Ho2023,Wong2019} 
 
 \begin{figure}[t]
     \centering
@@ -89,13 +89,11 @@ Singapore presents a particularly important context for addressing this problem.
 
 Second, Singapore exhibits a unique disease profile, with high rates of metabolic and cardiovascular conditions, which often necessitate multi-drug treatment plans.\cite{hop_health_concerns_2025} 
 
-Third, the healthcare system in Singapore emphasises precision medicine and efficient clinical decision-making, creating a strong demand for tools that can assist healthcare professionals in evaluating complex prescription combinations.Even though there are drug interaction database and alogrithms available, the data are mostly collected from a more Western profile. The bias in the data collected may lead to potential underrepresentation of certain diseases that are more common among Singaporeans. The underrepresentation indicates that the current algorithms may not be the most appropriate under Singaporean context and there is a significant space for improvement for us.  
-
 \subsection{Why machine learning algorithms}
 
 Machine learning has been effective in detecting patterns of drug interactions as it can be categorised as a classification task.\cite{Gheorghita2025} When the number of drugs involved in a single prescription increase, we expect the number of possible pair of drugs that may produce interaction to increase exponentially($N =$ $n\choose2$, n is the number of drugs and N is the number of possible pairs), which eventually leads to human oversight. 
 
-Even though there are available databases nowadays where doctors can use for reference. Machine learning alogrithm further enhances drug interaction detection as it is able to predict the reaction purely through the chemical structure of the drugs. This capability is relevant to Singapore context as most of the databses are constructed through European countries or the united states where some prescriptions more commonly utilised in Singapore may be unavailable because of different diesease profiles.
+Even though there are available databases nowadays where doctors can use for reference. Machine learning algorithm further enhances drug interaction detection as it is able to predict the reaction purely through the chemical structure of the drugs. This capability is relevant to Singapore context as most of the databases are constructed through sources from Western countries, where some prescriptions more commonly utilised in Singapore may be unavailable because of different disease profiles.
 
 We can further leverage the strengths of interpretable ML models—such as their ability to provide human-understandable decision rules and feature contributions—to ensure that medical professionals can trust and effectively utilise the model's predictions. More details will be explored in the solution section.
 
@@ -129,14 +127,14 @@ For drug interactions, we use the \textbf{BIOSNAP ChChMiner} dataset, which is d
 
 The BIOSNAP dataset only contains known positive interactions. Since no ground-truth negative pairs are provided, we construct negative examples by randomly sampling drug pairs that do not appear in the positive set. We follow the standard 1:1 positive-to-negative ratio. We acknowledge that this procedure relies on the assumption that pairs absent from DrugBank are treated as non-interacting, though some may represent undiscovered interactions. This is a well-recognised limitation of DDI benchmarks and is consistent with prior work in this area.
 
-Considering paitent condition, we use \textbf{FDA FARES} dataset, which contain reports of patients having adverse reactions after taking certain combination of drugs with their personal information about age, gender and etc.with the patients' consent.
+Considering patient condition, we use \textbf{FDA FARES} dataset, which contain reports of patients having adverse reactions after taking certain combination of drugs with their personal information about age, gender and etc.with the patients' consent.
 
 \subsubsection{Molecular Feature Representation}
 \ 
 \newline
 Each drug is represented as a 166-dimensional binary fingerprint generated using the MACCS Keys (Molecular ACCess System) scheme via RDKit. MACCS Keys encode the presence or absence of 166 predefined chemical substructures, such as the presence of a benzene ring (Key 120), a carboxyl group (Key 148), or a nitrogen-containing heterocycle (Key 80). Each bit is either 1 (substructure present) or 0 (absent).
 
-During data preprocessing, we removed MACCS bits with zero across all drugs in the dataset, which also means the bits representing chemicals that are universally universally absent. These chemical strucutres are not conventionally used in drugs and their removal reduces noise in the input representation. After this filtering step, the effective fingerprint dimensionality is reduced from 166 to 162 bits per drug, resulting in a final feature vector of 324 dimensions per drug pair.
+During data preprocessing, we removed MACCS bits with zero across all drugs in the dataset, which also means the bits representing chemicals that are universally absent. These chemical strucutres are not conventionally used in drugs and their removal reduces noise in the input representation. After this filtering step, the effective fingerprint dimensionality is reduced from 166 to 162 bits per drug.
 
 We chose MACCS Keys over the more commonly used Morgan fingerprints mainly because each MACCS bit corresponds to a named, chemically interpretable substructure, which directly supports our interpretability analysis.
 
@@ -198,11 +196,11 @@ Despite its simplicity, logistic regression provides a meaningful lower bound on
 Our Multi-Layer Perceptron consists of three fully-connected hidden layers with ReLU activations and dropout regularisation:
 
 \begin{center}
-    $324 \rightarrow 256 \rightarrow 128 \rightarrow 64 \rightarrow 1$
+    $162 \rightarrow 162 \rightarrow 128 \rightarrow 64 \rightarrow 1$
 \end{center}
 Dropout with probability 0.3 is applied after each of the first two hidden layers to reduce overfitting. The output layer uses a sigmoid activation to produce an interaction probability. The model is trained with the Adam optimiser (learning rate $10^{-3}$) and binary cross-entropy loss for 50 epochs, with the best checkpoint selected based on validation AUC-ROC.
 
-Compared to Random Forest, the MLP learns a more sophisticated combination of possible chemical interactions between different drug pairs. Given the nature of the data encoding, where each index refers to the presence of certain chemical strucutres in the drug. We can express a simplified example as the following.
+We can express a simplified example of how the MLP learns to capture complex chemical interactions as the following.
 
 \begin{figure}[h!]
     \centering
@@ -213,15 +211,14 @@ Compared to Random Forest, the MLP learns a more sophisticated combination of po
 
 From the figure above, we assume that the true concept $c(x) = 1,  x_1 \geq 1 \text{ and } x_2 \geq 1$, which means that the presence of both chemical $x_1$ and $x_2$ in the target drug pair will lead to an adverse interaction. We can then utilise the universal approximation theorem of neural networks to claim that this true function is recoverable thorugh MLP. 
 
-The particular relationship presented in the figure cannot be captured through naive logistic regression without any feature transformation since the size of input instance space $|X| = 8$ while $VC(H) = 3 < 8$ when the hypothesis space consists of all linear combinations of $x_1$ and $x_2$. On the other hand, MLP leverages on the universal approximation theroem which allows any polynomial continuous functions to be accurately approximated with sufficient number of neurons.
+The particular relationship presented in the figure cannot be captured through naive logistic regression without any feature transformation since the size of input instance space $|X| = 9$ while $VC(H) = 3 < 9$ when the hypothesis space consists of all linear combinations of $x_1$ and $x_2$. On the other hand, MLP leverages on the universal approximation theroem which allows any polynomial continuous functions to be accurately approximated with sufficient number of neurons.
 
-However, a major limitation of MLP alogrithm is its difficulty in prvoding an interpretable explanation to the doctor when advising possible drug interactions. First, the MLP learns the true function through universal approximation theorem which makes it impossible to recover the true function that MLP is approximating towards. Second, given that chemical reactions take place indepedently, MLP conflates all chemical reactions in one single hypothesis which makes it difficult to retreive the separate reactions that may take place between two drugs.
+However, a major limitation of MLP algorithm is its difficulty in providing an interpretable explanation to the doctor when advising possible drug interactions. First, the MLP learns the true function through universal approximation theorem which makes it impossible to recover the true function that MLP is approximating towards. Second, given that chemical reactions take place independently, MLP conflates all chemical reactions in one single hypothesis which makes it difficult to retrieve the separate reactions that may take place between two drugs.
 
 \subsubsection{Random Forest}
 \
 \newline
-\paragraph{Algorithm Overview.}
-Random Forest, introduced by \citet{Breiman2001}, is a non-parametric ensemble method that combines the predictions of $T$ independently trained decision trees to reduce variance while retaining the low bias of individual trees. Each tree $\mathcal{T}_t$ ($t = 1, \ldots, T$) is trained on a bootstrap resample $\mathcal{D}_t \sim \text{Bootstrap}(\mathcal{D})$ drawn \emph{with replacement} from the full training set $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^{n}$, where $\mathbf{x}_i \in \mathbb{R}^{p}$ and $y_i \in \{0, 1\}$. This procedure, known as \emph{bagging} \cite{Breiman1996}, ensures that each tree sees a different perturbation of the data, thereby decorrelating the ensemble members.
+Random Forest, introduced by \citet{Breiman2001}, is a non-parametric ensemble method that combines the predictions of $T$ independently trained decision trees to reduce variance while retaining the low bias of individual trees. Each tree $\mathcal{T}_t$ ($t = 1, \ldots, T$) is trained on a bootstrap resample $\mathcal{D}_t \sim \text{Bootstrap}(\mathcal{D})$ drawn \emph{with replacement} from the full training set $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^{n}$, where $\mathbf{x}_i \in \mathbb{R}^{p}$ and $y_i \in \{0, 1\}$.
  
 \paragraph{Tree Construction via CART.}
 Every tree is grown using the Classification and Regression Tree (CART) algorithm \cite{Breiman1984}. At each internal node $v$ with sample set $S_v$, CART selects the feature index $j^*$ and threshold $\tau^*$ that minimise the weighted Gini impurity of the resulting split:
@@ -257,16 +254,10 @@ Several properties of the DDI task make Random Forest a principled model choice.
 \subsubsection{Interpretability via Tree-Ranked Decision Path Output}
 \
 \newline
-A global feature importance metric such as Mean Decrease in Impurity
-(MDI) describes average behaviour across the entire training set.
-Our earlier PDP formulation aggregated isolated split conditions across
-all positive-voting trees, producing a ranked list of individual
-conditions.  Here we adopt a structurally richer strategy: we
+Here we adopt a novel strategy: we
 \emph{rank the trees themselves} and, for each top-ranked tree, output
 its \emph{complete} root-to-leaf decision path.  A full path is a
-conjunction of conditions — a single, coherent if-then rule — and is
-therefore directly interpretable by a clinician without further
-aggregation.
+conjunction of conditions and istherefore directly interpretable by a clinician without further aggregation.
  
 \paragraph{Decision Path of a Single Tree.}
 For a test sample $\mathbf{x}$ and tree $\mathcal{T}_t$, define the
@@ -277,34 +268,9 @@ encountered from the root to the reached leaf:
     \bigl(c_1^{(t)},\; c_2^{(t)},\; \ldots,\; c_{d_t}^{(t)}\bigr),
     \label{eq:path}
 \end{equation}
-where each condition is the triple
-$c_l^{(t)} = \bigl(j_l^{(t)},\; \tau_l^{(t)},\; \delta_l^{(t)}\bigr)$,
-with $j_l^{(t)}$ the MACCS key index, $\tau_l^{(t)} \in \{0.5, 1.5\}$
-the split threshold, $\delta_l^{(t)} \in \{\leq, >\}$ the branch
-direction taken by $\mathbf{x}$, and $d_t$ the path depth.
-The path $\Pi_t(\mathbf{x})$ encodes the following conjunction rule:
-\begin{equation}
-    \bigwedge_{l=1}^{d_t}
-    \Bigl(x_{j_l^{(t)}} \;\delta_l^{(t)}\; \tau_l^{(t)}\Bigr)
-    \;\Longrightarrow\; \tilde{y} = 1.
-    \label{eq:conjunction}
-\end{equation}
-Because $\tau_l^{(t)} \in \{0.5, 1.5\}$ and $x_j \in \{0,1,2\}$,
-every condition in \eqref{eq:conjunction} maps to one of two
-semantically precise chemical statements per MACCS key $j$:
-\begin{align}
-    x_j > 0.5 &\;\Longleftrightarrow\;
-        \text{at least one drug in the pair has substructure } j,
-        \label{eq:sem_one}\\
-    x_j > 1.5 &\;\Longleftrightarrow\;
-        \text{both drugs in the pair share substructure } j,
-        \label{eq:sem_both}\\
-    x_j \leq 0.5 &\;\Longleftrightarrow\;
-        \text{neither drug in the pair has substructure } j.
-        \label{eq:sem_none}
-\end{align}
- 
-\paragraph{Restricting to Positive-Voting Trees.}
+where $d_t$ is the depth of the reached leaf and each $c_i^{(t)}$ is a human-readable condition from the decision tree.
+
+\paragraph{Ranking Positive Trees.}
 Only trees that individually voted for an interaction carry explanatory
 relevance for the positive prediction.  Define the set of
 \emph{positive-voting trees} as
@@ -319,8 +285,7 @@ The ensemble predicts a positive interaction when
 $|\mathcal{T}^{+}(\mathbf{x})| > T/2$, so $\mathcal{T}^{+}(\mathbf{x})$
 is guaranteed to be non-empty whenever $\tilde{y} = 1$.
  
-\paragraph{Ranking Trees by Leaf Confidence.}
-Not all positive-voting trees are equally informative as explanations.
+However, not all positive-voting trees are equally informative as explanations.
 A tree whose reached leaf contains 95\% positive training samples made
 a highly decisive vote; a tree at 51\% barely cleared the threshold and
 its path reflects a weakly discriminative rule.  We rank trees by their
@@ -344,7 +309,6 @@ Setting $K > 1$ surfaces alternative rule sets that independently
 support the prediction, giving the clinician a sense of how
 structurally diverse the forest's reasoning is.
  
-\paragraph{Full-Path Output.}
 For each tree $t \in \mathcal{T}^{*}(\mathbf{x})$, ranked by confidence,
 we output the complete decision path $\Pi_t(\mathbf{x})$ as an ordered
 list of $d_t$ human-readable conditions.  For example, the top-ranked
@@ -358,16 +322,16 @@ $\Rightarrow$ both drugs carry a carboxyl group.}\\
 \emph{$\Rightarrow$ \textbf{Predicted: Interaction.}}
 \end{quote}
 
-This format is structurally analogous to a clinical decision rule, a format already familiar to medical professionals \cite{Rudin2019}. Each node corresponds to a testable chemical property; taken together, the conjunction rule constitutes a complete, falsifiable hypothesisabout why the interaction is predicted.
+This format is structurally analogous to a clinical decision rule, a format already familiar to medical professionals \cite{Rudin2019}. Each node corresponds to a testable chemical property; taken together, the conjunction of decision tree paths constitutes a complete, falsifiable hypothesis about why the interaction is predicted.
  
 \paragraph{Relationship to SHAP.}
 SHAP TreeExplainer \cite{Lundberg2020} produces a continuous attribution score $\phi_j$ per feature, computed as the average marginal
-contribution of feature $j$ across all feature orderings.The tree-ranked path approach is complementary: it provides the exact internal conjunction rule fired by the most confident tree, without any averaging or approximation. The two methods can be cross-validated by checking whether the top-$K$ MACCS keys appearing in $\Pi_{t^*}(\mathbf{x})$ (the most-confident tree's path) also carry high absolute SHAP values $|\phi_j|$.  Strong agreement indicates that the explanation is robust across both local-faithful and marginal-contribution perspectives.
+contribution of feature $j$ across all feature orderings. However, the tree-rank path better captures the reaction that involves several \textbf{groups} of chemicals. On the other hand, SHAP's ranking of individual features may fail to capture the interaction between a group of chemicals that are present in the same drug pair, which is a common mechanism of drug interactions.
  
 
 
-\section{Expreiment Process}
-\subsubsection{Dataset splits}
+\section{Experiment Process}
+\subsection{Dataset splits}
 \ 
 \newline
 The final dataset is split into training, validation, and test sets at an 80/10/10 ratio, with stratification to preserve the class balance across all splits.
@@ -399,7 +363,7 @@ the Random Forest and Tree-Ranked Decision Path (TRDP) sections.
 n
     & Number of training samples \\
 p
-    & Feature dimensionality; $p = 324$ after MACCS preprocessing \\
+    & Feature dimensionality; $p = 162$ after MACCS preprocessing \\
 \mathbf{x}_i
     & Feature vector of training sample $i$,
       $\mathbf{x}_i \in \mathbb{R}^{p}$ \\
