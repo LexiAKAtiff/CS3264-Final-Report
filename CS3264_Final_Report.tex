@@ -124,9 +124,7 @@ Then with the output possibility $\hat{y}$, we can further apply a threshold $\d
 \newline
 For drug interactions, we use the \textbf{BIOSNAP ChChMiner} dataset, which is derived from DrugBank and contains experimentally validated drug-drug interaction (DDI) pairs. Each entry in the raw dataset consists of two DrugBank IDs indicating that the pair of drugs is known to interact and should not be used together. After filtering out drug pairs for which molecular structures could not be retrieved, our dataset contains approximately 40,000 positive examples (interacting pairs). 
 
-The BIOSNAP dataset only contains known positive interactions. Since no ground-truth negative pairs are provided, we construct negative examples by randomly sampling drug pairs that do not appear in the positive set. We follow the standard 1:1 positive-to-negative ratio. We acknowledge that this procedure relies on the assumption that pairs absent from DrugBank are treated as non-interacting, though some may represent undiscovered interactions. This is a well-recognised limitation of DDI benchmarks and is consistent with prior work in this area.
-
-
+Since BIOSNAP contains only known positive drug-drug interactions (DDIs), negative examples must be constructed. Following standard practice, we randomly sample drug pairs absent from the positive set, or drug pairs with identical drugs at a 1:1 ratio, under two assumptions: a drug does not interact with itself, and any pair not listed in DrugBank is treated as non-interacting. While the latter assumption may exclude undiscovered interactions, this open-world limitation is well-recognised in DDI benchmarking and consistent with prior work
 
 \subsection{Input construction}
 
@@ -313,10 +311,16 @@ Our Multi-Layer Perceptron consists of three fully-connected hidden layers with 
 Dropout with probability 0.3 is applied after each of the first two hidden layers to reduce overfitting. The output layer uses a sigmoid activation to produce an interaction probability. The model is trained with the Adam optimiser (learning rate $10^{-3}$) and binary cross-entropy loss for 50 epochs, with the best checkpoint selected based on validation AUC-ROC.
 
 \subsection{Random Forest}
- In our experiments, we train a forest of $T = 100$ trees using the \texttt{sklearn} defaults: $m = \lfloor\sqrt{p}\rfloor$, unlimited tree depth, and minimum samples per leaf of 1.
+ In our experiments, we train a forest of $T = 100$ trees using the \texttt{sklearn} defaults: $m = \lfloor\sqrt{p}\rfloor$. We limit the tree depth to 5 to ensure interpretabiity of individual trees, and minimum samples per leaf of 1.
 
 \section{Results}
 % TODO: Add experimental details and results.
+\subsection{Prediciive performance}
+We used the confusion matrix as our major evaluation metric to evaluate the performance of our model. The confusion matrix is a 2x2 table that summarises the performance of a classification model by showing the counts of true positives (TP), true negatives (TN), false positives (FP), and false negatives (FN). The predicitive accuracy is measured in the validation set. 
+%TODO: Result for the following: MLP logistics Random forest with diffent hyperparameters(max depth = 3/5/10/20 and number of trees = 50/100/200)
+
+\subsection{Interpretability}
+We evaluate the interpretability of our model through two complementary approaches: (1) qualitative analysis of TRDP explanations, and (2) quantitative correlation between TRDP-selected features and SHAP attributions.
 \bibliography{CS3264_Final_Report}
 
 \end{document}
