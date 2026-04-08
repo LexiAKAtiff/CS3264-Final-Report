@@ -131,7 +131,7 @@ Since BIOSNAP contains only known positive drug-drug interactions (DDIs), negati
 \subsubsection{Drug Interaction Pairs}
 \
 \newline
-Each drug is represented as a 166-dimensional MACCS Keys (Molecular ACCess System) binary fingerprint \cite{rdkit}, encoding the presence or absence of predefined chemical substructures (e.g., Key 120 = benzene ring, Key 148 = carboxyl group). MACCS Keys are widely adopted in pharmaceutical research \cite{xie2020improvement,durant2002reoptimization} and, unlike Morgan fingerprints, each bit maps to a named, chemically interpretable substructure, directly supporting our interpretability analysis. After removing zero-variance bits (universally absent across our dataset), the effective dimensionality is reduced from 166 to 162. The model learns to predict the interaction label based on the combined features of the two drugs.
+Each drug is represented as a 166-dimensional MACCS Keys (Molecular ACCess System) binary fingerprint \cite{rdkit}, encoding the presence or absence of predefined chemical substructures (e.g., Key 158 = carbon–nitrogen single bond). MACCS Keys are widely adopted in pharmaceutical research \cite{xie2020improvement,durant2002reoptimization} and, unlike Morgan fingerprints, each bit maps to a named, chemically interpretable substructure, directly supporting our interpretability analysis. After removing zero-variance bits (universally absent across our dataset), the effective dimensionality is reduced from 166 to 162. The model learns to predict the interaction label based on the combined features of the two drugs.
 
 However, to study the pair of drugs as the input, we need to combine their molecular fingerprints into a single vector. In other words, 
 \begin{center}$x = g(D_A, D_B)$
@@ -321,6 +321,11 @@ We used the confusion matrix as our major evaluation metric to evaluate the perf
 
 \subsection{Interpretability}
 We evaluate the interpretability of our model through two complementary approaches: (1) qualitative analysis of TRDP explanations, and (2) quantitative correlation between TRDP-selected features and SHAP attributions.
-\bibliography{CS3264_Final_Report}
 
+\bibliography{CS3264_Final_Report}
+\section{Appendix A: MACCS Key to interpretation table}
+The original MACCS Keys consist of 166 bits, each corresponding to a specific chemical substructure. The interpretation of each key was uploaded in the following link. We have converted the chemical substructure into a more human-readable format, which is shown in the link below The table also includes the original MACCS key number for reference.
+
+Oringinal MACCS Keys: \url{https://github.com/rdkit/rdkit/blob/master/rdkit/Chem/MACCSkeys.py}
+Human-readable MACCS Keys: \url{}
 \end{document}
