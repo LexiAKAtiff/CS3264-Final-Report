@@ -67,7 +67,7 @@ Polypharmacy is a growing concern in Singapore's ageing population, substantiall
 
 \section{Introduction}
 
-The rapid advancement of healthcare systems and increased life expectancy have led to a growing prevalence of polypharmacy, where patients—particularly elderly individuals—are prescribed multiple medications simultaneously. While such multi-drug therapies are often necessary for managing chronic conditions, they significantly increase the risk of drug-drug interactions (DDIs). Statistics show that DDIs may greatly contribute to a worsening patient condition through adverse side effects.\cite{Chan2016:chan}, and the risk of DDIs is underperceived by the medical industry.\cite{polypharmacy}
+The rapid advancement of healthcare systems and increased life expectancy have led to a growing prevalence of polypharmacy, where patients, particularly elderly individuals,are prescribed multiple medications simultaneously. While such multi-drug therapies are often necessary for managing chronic conditions, they significantly increase the risk of drug-drug interactions (DDIs). Statistics show that DDIs may greatly contribute to a worsening patient condition through adverse side effects.\cite{Chan2016:chan}, and the risk of DDIs is underperceived by the medical industry.\cite{polypharmacy}
 
 DDI is especially critical in Singapore.\cite{Ho2023} Given that there is a vacuum in reliable formal methods among Singaporean doctors to avoid drug interactions, we propose to leverage machine learning algorithms to provide explainable advice to Singaporean doctors on possible drug interactions for every prescription. We first show that drug interaction is an important issue that can be properly addressed through machine learning algorithm under Singaporean context. We will then expound on the further details in our choice of the machine learning algorithm and its training process. Last but not the least, we will demonstrate the result of our prototypical machine learning application and how it benefits Singapore's medical industry through providing explainable advice on potential drug interactions in prescriptions.
 
@@ -76,7 +76,7 @@ DDI is especially critical in Singapore.\cite{Ho2023} Given that there is a vacu
 
 \subsection{Drug interactions as a severe issue in Singapore}
 
-DDI has been recognised as a significant contributor to the degeneration of patient health.\cite{polypharmacy,Chan2016:chan}. The complexity of managing multiple medications increases the likelihood of unintended interactions, making it crucial for healthcare providers to have effective tools for predicting and preventing DDIs.
+DDI has been recognised as an important source of medication-related harm, especially in older adults.\cite{polypharmacy,Chan2016:chan}. The complexity of managing multiple medications increases the likelihood of unintended interactions, making it crucial for healthcare providers to have effective tools for predicting and preventing DDIs.
 
 Singapore presents a particularly important context for addressing this problem. First, the country's demographic structure is shifting toward an ageing society, with a high proportion of elderly individuals requiring long-term medication.\cite{singstat_population_2025} Figure 1 shows our rough estimate of the elderly population in Singapore based on the age distribution of the population and the stratified death rate of different age groups\cite{singstat_death_rate_2025} in Singapore in 2025. A sharp increase in the demand of polypharmacy is therefore expected.\cite{Ho2023,Wong2019} 
 
@@ -87,7 +87,7 @@ Singapore presents a particularly important context for addressing this problem.
     \label{fig:population_pyramid}
 \end{figure}
 
-Second, Singapore exhibits a unique disease profile, with high rates of metabolic and cardiovascular conditions, which often necessitate multi-drug treatment plans.\cite{hop_health_concerns_2025} 
+Second, Singapore exhibits a unique disease profile, with high rates of metabolic and cardiovascular conditions, which often necessitate multi-drug treatment plans.\cite{hop_health_concerns_2025} Accordingly, our proposed app is intended as a prescription-stage decision support tool for clinicians in Singapore, flagging potentially risky drug pairs.
 
 \subsection{Why machine learning algorithms}
 
