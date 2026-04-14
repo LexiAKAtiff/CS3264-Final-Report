@@ -1,5 +1,5 @@
 \documentclass[letterpaper]{article} % DO NOT CHANGE THIS
-\usepackage[submission]{aaai2026}  % DO NOT CHANGE THIS
+\usepackage[]{aaai2026}  % DO NOT CHANGE THIS
 \usepackage{times}  % DO NOT CHANGE THIS
 \usepackage{helvet}  % DO NOT CHANGE THIS
 \usepackage{courier}  % DO NOT CHANGE THIS
@@ -46,16 +46,12 @@
 % Title
 \title{Interpretable Machine Learning for Predicting Adverse Drug Interactions in Singapore}
 \author{
-    % Authors - Replace with actual names
-    An Xiao\textsuperscript{\rm 1},
-    Liu Lexi\textsuperscript{\rm 2},
-    Zhou Zirun\textsuperscript{\rm 3}
+    An Xiao (A0300401J)\textsuperscript{\rm 1},
+    Liu Lexi ()\textsuperscript{\rm 2},
+    Zhou Zirun ()\textsuperscript{\rm 3},
+    Group 17
 }
-\affiliations{
-    % Affiliations
-    \textsuperscript{\rm 1}School of Computing, National University of Singapore\\
-    student1@nus.edu.sg, student2@nus.edu.sg, student3@nus.edu.sg
-}
+
 
 \begin{document}
 
@@ -423,12 +419,12 @@ The original MACCS Keys consist of 166 bits, each corresponding to a specific ch
 
 \textbf{Oringinal MACCS Keys}: \url{https://github.com/rdkit/rdkit/blob/master/rdkit/Chem/MACCSkeys.py}
 
-\textbf{Human-readable MACCS Keys}: \url{https://github.com/Anxinal/CS3264-Final-Report.git}
+\textbf{Human-readable MACCS Keys}: \url{https://github.com/Anxinal/CS3264-FinalProject-Experiment/blob/main/MACCS_Keys_Human_Readable_Reference.xlsx}
 
 \section{Appendix B: Experiment Repository}
 The experiment code and data processing scripts are available in the following GitHub repository: 
 
-\url{https://github.com/Anxinal/CS3264-Final-Report.git}
+\url{https://github.com/Anxinal/CS3264-FinalProject-Experiment.git}
 
 
 \section{Appendix D: Additional Experiment Results}
@@ -567,7 +563,6 @@ $k$ & Nbrs & $\bar{C}$ & $\bar{S}_J$ (std) & $\bar{C}$ & $\bar{S}_J$ (std) \\
 \end{tabular}}
 \end{table}
 
-\paragraph{Interpretation.}
-All three anchors show prediction consistency of~1.000 at every non-empty threshold for both models. The guided RF consistently produces higher Jaccard scores than the baseline across all three anchors and all $k$ values where neighbours exist: at $k=20$ the guided RF improvement ranges from $\times1.6$ (val[2823]: $0.438$ vs $0.272$) to $\times5.5$ (val[5271]: $0.240$ vs $0.044$). At tight $k$ (5--10), where only the nearest neighbour exists, both models achieve Jaccard~$=1.000$, confirming that the single closest sample shares an identical top-1 TRDP path. As $k$ grows, Jaccard declines for both models but the guided RF degrades more slowly, indicating that SHAP-guided sampling produces structurally more coherent explanations across a wider neighbourhood.
+
 
 \end{document}
